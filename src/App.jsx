@@ -3,16 +3,18 @@ import "./App.css";
 import { useEffect } from "react";
 
 const App = () => {
-  const [userId, setUserId] = useState(1);
+  // const [userId, setUserId] = useState(1);
+
+  const [getTodo, setGettodo] = useState([]);
 
   const getTodods = async () => {
     try {
       const response = await fetch(
-        `https://jsonplaceholder.typicode.com/todos/${userId}`
+        `https://jsonplaceholder.typicode.com/posts`
       );
 
       const responseData = await response.json();
-      console.log(responseData);
+      setGettodo(responseData);
     } catch (error) {
       console.error(error);
     }
@@ -20,15 +22,18 @@ const App = () => {
 
   useEffect(() => {
     getTodods();
-  }, [userId]);
+  }, []);
 
   return (
     <>
-      <input
-        type="number"
-        value={userId}
-        onChange={(e) => setUserId(e.target.value)}
-      />
+      {getTodo.map((item) => {
+        return (
+          <div key={item.id}>
+            <h2>{item.title}</h2>
+            <h2>{item.body}</h2>
+          </div>
+        );
+      })}
     </>
   );
 };
