@@ -26,6 +26,7 @@ const App = () => {
 
   return (
     <>
+      <h1>todo</h1>
       {getTodo.map((item) => {
         return (
           <div key={item.id}>
